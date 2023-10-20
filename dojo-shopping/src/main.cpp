@@ -16,7 +16,7 @@ int main() {
     shoppingCart.remove_product(shoes);
 
     double productsTotalPrice = shoppingCart.check_out("Regular", "Credit Card", 0, "Fixed", 1);
-    cout << "ProductsTotalPrice: " << productsTotalPrice;
+    cout << "Checkout Result: " << productsTotalPrice;
 
     return 1;
 }
