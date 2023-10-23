@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>// streaming operators etc.
 #include <cmath> // Include the cmath library 
+#include <vector>
 
 using namespace std; //means that we can use names for objects and variables from the standard library.
 using namespace boost;
@@ -130,6 +131,13 @@ void strings() {
 
     uuid uuid = boost::uuids::random_generator()();
     cout << uuid << "\n";
+
+    stringstream ss;
+    //put arbitrary formatted data into the stream
+    ss << 4.5 << ", " << 4 << " whatever";
+    //convert the stream buffer into a string
+    string str = ss.str();
+    cout << "String builder: " << str << "\n";
 }
 
 void math() {
@@ -248,6 +256,17 @@ void loops() {
     cout << "\n";
 }
 
+template <typename S>
+
+void print_vector(const vector<S>& vec, string separator = " ")
+{
+    for (auto elem : vec) {
+        cout << elem << separator;
+    }
+ 
+    cout << endl;
+}
+
 void collections() {
     int numbers[4];
     string cars[3] = {"Argo", "BMW", "Fusca"};
@@ -258,6 +277,46 @@ void collections() {
     string names[] = {"Gabriel", "Fernanda", "Maria", "Jose"};
     // this is the way to get the size of some list
     cout << "We have the size of names: " << sizeof(names) / sizeof(string) << "\n";
+
+    //vector
+    vector<int> numbers_vector;
+    cout << "Numbers Vector: ";
+    print_vector(numbers_vector);
+
+    numbers_vector.push_back(9);
+    numbers_vector.push_back(17);
+    numbers_vector.push_back(12);
+
+    cout << "Numbers Vector: ";
+    print_vector(numbers_vector);
+
+    cout << "Element on index 0 of vector: " << numbers_vector.at(0) << "\n";
+
+    try {
+        // gives garbage value
+        cout << "Element on index 3 of vector: " << numbers_vector[4] << "\n";
+
+        // throws an exception
+        cout << "Element on index 3 of vector: " << numbers_vector.at(4) << "\n";
+    } catch (const std::exception& ex) {
+        cout << endl;
+        cerr << "Exception: " << ex.what() << endl;
+    }
+
+    numbers_vector.at(0) = 3;
+    cout << "Numbers Vector: ";
+    print_vector(numbers_vector);
+
+    numbers_vector.pop_back();   
+    cout << "Numbers Vector: ";
+    print_vector(numbers_vector);
+
+    // Deletes the second element (vec[1])
+    //numbers_vector.erase(std::next(numbers_vector.begin()));
+    numbers_vector.erase(numbers_vector.begin() + 0);
+
+    cout << "Numbers Vector: ";
+    print_vector(numbers_vector);
 }
 
 // single structure 
